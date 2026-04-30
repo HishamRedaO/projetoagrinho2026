@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conexão Campo & Cidade</title>
     <style>
-        /* Variáveis de Cores para facilitar */
         :root {
             --cor-campo: #48742c;
             --cor-cidade: #2c3e50;
@@ -20,11 +19,10 @@
             background-color: var(--bg-suave);
         }
 
-        /* Header com gradiente que une os dois mundos */
         header {
             background: linear-gradient(135deg, var(--cor-campo) 0%, var(--cor-cidade) 100%);
             color: white;
-            padding: 4rem 1rem;
+            padding: 3rem 1rem;
             text-align: center;
         }
 
@@ -34,71 +32,61 @@
             padding: 20px;
         }
 
-        .intro {
-            text-align: center;
-            margin-bottom: 50px;
+        /* Estilo das Abas */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
 
-        /* Grid de Contraste */
-        .dual-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .box {
-            padding: 30px;
-            border-radius: 15px;
-            background: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .box:hover {
-            transform: translateY(-10px);
-        }
-
-        .box.campo {
-            border-top: 10px solid var(--cor-campo);
-        }
-
-        .box.cidade {
-            border-top: 10px solid var(--cor-cidade);
-        }
-
-        h2 {
-            margin-top: 0;
-        }
-
-        .campo h2 { color: var(--cor-campo); }
-        .cidade h2 { color: var(--cor-cidade); }
-
-        /* Banner de Integração */
-        .integração {
-            background: #fff;
-            padding: 40px;
-            margin-top: 40px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px dashed #ccc;
-        }
-
-        .highlight {
-            color: var(--cor-acento);
+        .tab-btn {
+            padding: 12px 25px;
+            border: none;
+            background: #ddd;
+            cursor: pointer;
+            border-radius: 30px;
             font-weight: bold;
+            transition: 0.3s;
+            font-size: 1rem;
         }
+
+        .tab-btn.active {
+            background: var(--cor-acento);
+            color: white;
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.4);
+        }
+
+        /* Conteúdo das Abas */
+        .tab-content {
+            display: none; /* Esconde por padrão */
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block; /* Mostra a aba ativa */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: var(--cor-cidade); border-bottom: 2px solid var(--cor-acento); padding-bottom: 10px; }
+        
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
 
         footer {
             text-align: center;
-            padding: 3rem;
+            padding: 2rem;
             background: #eee;
             margin-top: 50px;
-        }
-
-        /* Responsividade para celulares */
-        @media (max-width: 600px) {
-            header { padding: 2rem 1rem; }
         }
     </style>
 </head>
@@ -106,47 +94,63 @@
 
 <header>
     <h1>Elo Campo & Cidade</h1>
-    <p>Onde a produção de alimentos encontra a inovação urbana</p>
+    <p>A sinergia que alimenta e inova o mundo</p>
 </header>
 
 <div class="container">
-    <section class="intro">
-        <h2>A Interdependência que Move o Brasil</h2>
-        <p>Sem o campo, a cidade não se alimenta. Sem a cidade, o campo não se moderniza.</p>
-    </section>
-
-    <div class="dual-grid">
-        <article class="box campo">
-            <h2>🌿 No Campo</h2>
-            <p>O foco é a <strong>sustentabilidade</strong> e a eficiência biológica. É onde a vida começa e a matéria-prima é gerada com precisão tecnológica.</p>
-            <ul>
-                <li>Agricultura Regenerativa</li>
-                <li>Gestão de Recursos Naturais</li>
-                <li>Produção de Alimentos e Fibras</li>
-            </ul>
-        </article>
-
-        <article class="box cidade">
-            <h2>🏙️ Na Cidade</h2>
-            <p>O foco é a <strong>logística, consumo e inovação</strong>. É o centro de processamento, distribuição e onde a demanda dita o ritmo da safra.</p>
-            <ul>
-                <li>Centros de Distribuição Inteligentes</li>
-                <li>Tecnologia de Rastreabilidade</li>
-                <li>Mercados Consumidores e Agtechs</li>
-            </ul>
-        </article>
+    
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'campo-ajuda')">Como o Campo ajuda a Cidade?</button>
+        <button class="tab-btn" onclick="openTab(event, 'cidade-ajuda')">Como a Cidade ajuda o Campo?</button>
     </div>
 
-    <section class="integração">
-        <h3>O Futuro é <span class="highlight">Conectado</span></h3>
-        <p>Projetos de IoT (Internet das Coisas) e 5G estão diminuindo a distância física, transformando a fazenda em um escritório a céu aberto e a cidade em um hub de suporte rural.</p>
-    </section>
+    <div id="campo-ajuda" class="tab-content active">
+        <h2>🌿 O Campo é o alicerce da vida urbana</h2>
+        <p>Sem o trabalho rural, as metrópoles não teriam sustentação básica para existir:</p>
+        <ul>
+            <li><strong>Segurança Alimentar:</strong> Fornecimento de 100% da base nutricional (grãos, carnes, frutas e hortaliças).</li>
+            <li><strong>Matéria-prima:</strong> Produção de fibras para tecidos (algodão) e madeira para construção e móveis.</li>
+            <li><strong>Energia Limpa:</strong> O agro produz biocombustíveis (etanol e biodiesel) que movem os transportes urbanos.</li>
+            <li><strong>Equilíbrio Ambiental:</strong> Manutenção de reservas florestais que ajudam a regular o clima das regiões.</li>
+        </ul>
+    </div>
+
+    <div id="cidade-ajuda" class="tab-content">
+        <h2>🏙️ A Cidade é o motor da evolução rural</h2>
+        <p>A modernização do campo depende diretamente dos serviços e tecnologias gerados no centro urbano:</p>
+        <ul>
+            <li><strong>Tecnologia e Inovação:</strong> Desenvolvimento de softwares de gestão, satélites, drones e GPS de precisão.</li>
+            <li><strong>Ciência e Genética:</strong> Pesquisas laboratoriais feitas em universidades urbanas para sementes mais resistentes.</li>
+            <li><strong>Mercado Consumidor:</strong> A cidade é o principal destino das vendas, gerando a renda necessária para o produtor reinvestir.</li>
+            <li><strong>Maquinário:</strong> Indústrias urbanas fabricam tratores e implementos que aumentam a produtividade no campo.</li>
+        </ul>
+    </div>
+
 </div>
 
 <footer>
-    <p><strong>Projeto Campo & Cidade</strong> - Desenvolvido no GitHub por Você.</p>
-    <p>2026 | Tecnologia a serviço do progresso.</p>
+    <p><strong>Projeto Conexão Agro</strong> | Desenvolvido no GitHub</p>
 </footer>
+
+<script>
+    function openTab(evt, tabName) {
+        // Esconde todos os conteúdos das abas
+        var contents = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < contents.length; i++) {
+            contents[i].className = contents[i].className.replace(" active", "");
+        }
+
+        // Remove a classe "active" de todos os botões
+        var buttons = document.getElementsByClassName("tab-btn");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].className = buttons[i].className.replace(" active", "");
+        }
+
+        // Mostra a aba atual e adiciona a classe "active" ao botão clicado
+        document.getElementById(tabName).className += " active";
+        evt.currentTarget.className += " active";
+    }
+</script>
 
 </body>
 </html>
