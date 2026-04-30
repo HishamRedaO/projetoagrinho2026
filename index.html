@@ -3,154 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conexão Campo & Cidade</title>
+    <title>Conexão Campo & Cidade | Bem-vindo</title>
     <style>
         :root {
             --cor-campo: #48742c;
             --cor-cidade: #2c3e50;
             --cor-acento: #f39c12;
-            --bg-suave: #f9f9f9;
+            --bg-suave: #f4f7f6;
         }
 
         body {
-            font-family: 'Inter', sans-serif, Arial;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
+            padding: 0;
             color: #333;
             background-color: var(--bg-suave);
+            scroll-behavior: smooth;
         }
 
-        header {
-            background: linear-gradient(135deg, var(--cor-campo) 0%, var(--cor-cidade) 100%);
-            color: white;
-            padding: 3rem 1rem;
+        /* --- TELA DE BOAS VINDAS (HERO) --- */
+        .welcome-hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80'); /* Imagem de campo e horizonte */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 0 20px;
         }
 
-        .container {
+        .welcome-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .welcome-hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .btn-scroll {
+            background: var(--cor-acento);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-scroll:hover {
+            transform: scale(1.05);
+            background: #e68a00;
+        }
+
+        /* --- SEÇÃO DE CONTEÚDO --- */
+        .main-content {
+            padding: 80px 20px;
             max-width: 1000px;
             margin: auto;
-            padding: 20px;
         }
 
-        /* Estilo das Abas */
-        .tabs {
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--cor-cidade);
+        }
+
+        /* --- ABAS (TABS) --- */
+        .tabs-container {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .tabs-header {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            background: #eee;
+            border-bottom: 2px solid #ddd;
         }
 
         .tab-btn {
-            padding: 12px 25px;
+            flex: 1;
+            padding: 20px;
             border: none;
-            background: #ddd;
+            background: none;
             cursor: pointer;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: 0.3s;
             font-size: 1rem;
+            font-weight: bold;
+            color: #666;
+            transition: 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: #f9f9f9;
         }
 
         .tab-btn.active {
-            background: var(--cor-acento);
-            color: white;
-            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.4);
-        }
-
-        /* Conteúdo das Abas */
-        .tab-content {
-            display: none; /* Esconde por padrão */
             background: white;
+            color: var(--cor-campo);
+            border-bottom: 4px solid var(--cor-campo);
+        }
+
+        /* --- CONTEÚDO DAS ABAS --- */
+        .tab-panel {
+            display: none;
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            animation: fadeIn 0.5s ease;
+            animation: slideUp 0.4s ease-out;
         }
 
-        .tab-content.active {
-            display: block; /* Mostra a aba ativa */
+        .tab-panel.active {
+            display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h2 { color: var(--cor-cidade); border-bottom: 2px solid var(--cor-acento); padding-bottom: 10px; }
-        
-        ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
+        .tab-panel h3 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            color: var(--cor-campo);
+        }
+
+        .tab-panel ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tab-panel li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .tab-panel li::before {
+            content: "✓";
+            margin-right: 15px;
+            color: var(--cor-acento);
+            font-weight: bold;
+        }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            background: #eee;
-            margin-top: 50px;
+            padding: 40px;
+            background: var(--cor-cidade);
+            color: white;
+            margin-top: 60px;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Elo Campo & Cidade</h1>
-    <p>A sinergia que alimenta e inova o mundo</p>
-</header>
+    <section class="welcome-hero">
+        <h1>Conexão Campo & Cidade</h1>
+        <p>Entenda como a união entre a produção rural e a tecnologia urbana sustenta o futuro do planeta.</p>
+        <button class="btn-scroll" onclick="document.getElementById('explorar').scrollIntoView();">Explorar Interdependência</button>
+    </section>
 
-<div class="container">
-    
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab(event, 'campo-ajuda')">Como o Campo ajuda a Cidade?</button>
-        <button class="tab-btn" onclick="openTab(event, 'cidade-ajuda')">Como a Cidade ajuda o Campo?</button>
+    <div id="explorar" class="main-content">
+        
+        <div class="section-title">
+            <h2>Qual o propósito deste site?</h2>
+            <p>Este espaço foi criado para desmistificar a distância entre o campo e a cidade. Aqui mostramos que são dois lados da mesma moeda: um gera o recurso, o outro gera a ferramenta. Clique nas abas abaixo para entender cada papel.</p>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="openTab(event, 'inicio')">O Propósito</button>
+                <button class="tab-btn" onclick="openTab(event, 'campo')">O que o Campo oferece?</button>
+                <button class="tab-btn" onclick="openTab(event, 'cidade')">O que a Cidade oferece?</button>
+            </div>
+
+            <div id="inicio" class="tab-panel active">
+                <h3>🔍 Visão Geral</h3>
+                <p>Nossa missão é educar sobre a cadeia produtiva. No mundo moderno, o campo não é mais "atrasado" e a cidade não é apenas "concreto". Ambos são tecnológicos e dependem um do outro para sobreviver.</p>
+                <p><strong>Escolha uma das abas acima para mergulhar nos detalhes.</strong></p>
+            </div>
+
+            <div id="campo" class="tab-panel">
+                <h3>🌿 Contribuições do Campo</h3>
+                <p>O campo é a fábrica a céu aberto que sustenta a vida urbana:</p>
+                <ul>
+                    <li><strong>Alimentação:</strong> A base de tudo o que consumimos nas cidades.</li>
+                    <li><strong>Oxigênio e Clima:</strong> Preservação de matas e rios.</li>
+                    <li><strong>Energia:</strong> Cultivo de cana para etanol e soja para biodiesel.</li>
+                    <li><strong>Exportação:</strong> Fortalecimento da economia nacional através do agro.</li>
+                </ul>
+            </div>
+
+            <div id="cidade" class="tab-panel">
+                <h3>🏙️ Contribuições da Cidade</h3>
+                <p>A cidade é o laboratório e o centro logístico que potencializa o campo:</p>
+                <ul>
+                    <li><strong>Inovação:</strong> Criação de drones, sensores e softwares de gestão.</li>
+                    <li><strong>Educação:</strong> Universidades e centros de pesquisa agronômica.</li>
+                    <li><strong>Mercado:</strong> Onde 85% da população consome o que o campo produz.</li>
+                    <li><strong>Logística:</strong> Estradas, portos e indústrias de beneficiamento.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
-    <div id="campo-ajuda" class="tab-content active">
-        <h2>🌿 O Campo é o alicerce da vida urbana</h2>
-        <p>Sem o trabalho rural, as metrópoles não teriam sustentação básica para existir:</p>
-        <ul>
-            <li><strong>Segurança Alimentar:</strong> Fornecimento de 100% da base nutricional (grãos, carnes, frutas e hortaliças).</li>
-            <li><strong>Matéria-prima:</strong> Produção de fibras para tecidos (algodão) e madeira para construção e móveis.</li>
-            <li><strong>Energia Limpa:</strong> O agro produz biocombustíveis (etanol e biodiesel) que movem os transportes urbanos.</li>
-            <li><strong>Equilíbrio Ambiental:</strong> Manutenção de reservas florestais que ajudam a regular o clima das regiões.</li>
-        </ul>
-    </div>
+    <footer>
+        <p>&copy; 2026 - Conexão Agro | Criado para o Futuro do Agronegócio</p>
+    </footer>
 
-    <div id="cidade-ajuda" class="tab-content">
-        <h2>🏙️ A Cidade é o motor da evolução rural</h2>
-        <p>A modernização do campo depende diretamente dos serviços e tecnologias gerados no centro urbano:</p>
-        <ul>
-            <li><strong>Tecnologia e Inovação:</strong> Desenvolvimento de softwares de gestão, satélites, drones e GPS de precisão.</li>
-            <li><strong>Ciência e Genética:</strong> Pesquisas laboratoriais feitas em universidades urbanas para sementes mais resistentes.</li>
-            <li><strong>Mercado Consumidor:</strong> A cidade é o principal destino das vendas, gerando a renda necessária para o produtor reinvestir.</li>
-            <li><strong>Maquinário:</strong> Indústrias urbanas fabricam tratores e implementos que aumentam a produtividade no campo.</li>
-        </ul>
-    </div>
+    <script>
+        function openTab(evt, tabId) {
+            // Esconde todos os painéis
+            var panels = document.getElementsByClassName("tab-panel");
+            for (var i = 0; i < panels.length; i++) {
+                panels[i].classList.remove("active");
+            }
 
-</div>
+            // Remove classe ativa dos botões
+            var buttons = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
 
-<footer>
-    <p><strong>Projeto Conexão Agro</strong> | Desenvolvido no GitHub</p>
-</footer>
-
-<script>
-    function openTab(evt, tabName) {
-        // Esconde todos os conteúdos das abas
-        var contents = document.getElementsByClassName("tab-content");
-        for (var i = 0; i < contents.length; i++) {
-            contents[i].className = contents[i].className.replace(" active", "");
+            // Mostra o painel clicado e ativa o botão
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
         }
-
-        // Remove a classe "active" de todos os botões
-        var buttons = document.getElementsByClassName("tab-btn");
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].className = buttons[i].className.replace(" active", "");
-        }
-
-        // Mostra a aba atual e adiciona a classe "active" ao botão clicado
-        document.getElementById(tabName).className += " active";
-        evt.currentTarget.className += " active";
-    }
-</script>
+    </script>
 
 </body>
 </html>
